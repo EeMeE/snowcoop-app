@@ -31,6 +31,7 @@
 
 .el-menu-item:hover>span {
   color: #1974e8;
+  background-color: none;
 }
 
 .logo {
