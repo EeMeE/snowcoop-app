@@ -1,6 +1,6 @@
 <template>
   <div id="dashboardPage">
-    <div class="dash">Hi {{firstName}} , Welcome to Snowcoop</div>
+    <div class="dash">Hi {{firstName}}, welcome to Snowcoop</div>
   </div>
 </template>
 <script src="./dashboard-page.component.js"></script>
