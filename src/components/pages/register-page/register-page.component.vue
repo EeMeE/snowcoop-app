@@ -9,11 +9,11 @@
         <div class="form-body-wrapper">
           <!-- TODO: add form and form items inside for all control
           can add form from elemet ui-->
-          <el-form ref="formData" v-model="formData" @focusout.native="updateIsFormValidated">
+          <el-form ref="formData" :model="formData" @focusout.native="updateIsFormValidated">
             <el-row :gutter="20">
               <el-col :span="12">
                 <el-form-item :rules="rules.firstName" prop="firstName">
-                  <el-input placeholder="First Name" v-model="formData.firstName"></el-input>
+                  <el-input placeholder="First Name" v-model="formData.firstName" autofocus></el-input>
                 </el-form-item>
               </el-col>
               <el-col :span="12">
@@ -43,10 +43,22 @@
                 </el-form-item>
               </el-col>
             </el-row>
+            <div class="instruction-text-wrapper">
+              <p>Use 8 or more characters with a mix of letters, numbers and symbols</p>
+            </div>
           </el-form>
         </div>
+
         <div class="form-footer-wrapper">
           <!-- TODO: add buttons and wire up event handler and routing method -->
+          <div class="text-button-wrapper">
+            <router-link to="/login">
+              <a>Sign in instead</a>
+            </router-link>
+          </div>
+          <div class="next-button-wrapper">
+            <button v-bind:disabled="!isFormValidated" @click="register">Next</button>
+          </div>
         </div>
       </el-card>
     </div>

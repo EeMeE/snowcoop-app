@@ -89,8 +89,16 @@
  }
 
  .instruction-text-wrapper {
+   width: 480px;
+   height: 42px;
+   font-family: Roboto;
    font-size: 18px;
    color: #a2a2a2;
    margin-top: -13px;
    margin-bottom: 57px;
+   font-weight: normal;
+   font-style: normal;
+   font-stretch: normal;
+   line-height: normal;
+   letter-spacing: 0.2px;
  }
