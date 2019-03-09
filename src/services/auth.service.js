@@ -24,18 +24,6 @@ const AuthService = {
       });
   },
 
-  username(firstName) {
-    return Axios.get('http://localhost:3000/auth/username', firstName)
-      .then(response => {
-        if (response.status === 200 || response.status === 201) {
-          const {
-            payload
-          } = response.data;
-          return payload;
-        }
-      });
-  },
-
   setHeader(access_token) {
     Axios.defaults.headers.common['Authorization'] = access_token;
   },
