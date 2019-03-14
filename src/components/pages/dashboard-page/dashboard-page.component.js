@@ -2,13 +2,9 @@
 //import { Store } from 'vuex';
 export default {
   name: 'dashboardPage',
-  data() {
-    return {
-      firstName: 'John',
-      // computed: {
-      // firstName() {
-      //   return this.$store.getters.USER;
-      // },
+  computed: {
+    firstName() {
+      return this.$store.getters.USER.firstName
     }
   },
 };
