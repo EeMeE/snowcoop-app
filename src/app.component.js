@@ -10,9 +10,4 @@ export default {
       return this.$store.getters.IS_LOGIN
     }
   },
-  // computed: {
-  //  firstName() {
-  //   return this.$store.getters.firstName
-  // }
-  //},
 };
