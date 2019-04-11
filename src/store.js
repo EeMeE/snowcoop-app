@@ -1,98 +1,85 @@
 import Vue from 'vue'
-import Vuex from 'vuex';
-import AuthService from './services/auth.service';
-import Axios from 'axios';
+import Vuex from 'vuex'
+import AuthService from './services/auth.service'
+import Axios from 'axios'
 
-Vue.use(Vuex);
+Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
-    token: null,
-    user: null,
-    addressList: null,
+    token: null || localStorage.getItem('token'),
+    user: null || localStorage.getItem('token'),
+    addressList: null
   },
   getters: {
     USER: state => {
-      return state.user;
+      return state.user
     },
     IS_LOGIN: state => {
-      return !!state.token;
+      return !!state.token
     },
     ADDRESS_LIST: state => {
-      return !!state.addressList;
+      return state.addressList
     }
   },
   mutations: {
     SET_TOKEN: (state, payload) => {
-      state.token = payload;
+      state.token = payload
     },
     SET_USER: (state, payload) => {
-      state.user = payload;
+      state.user = payload
     },
     SET_ADDRESS_LIST: (state, payload) => {
-      state.addressList = payload;
+      state.addressList = payload
     }
   },
   actions: {
     LOG_IN: (context, payload) => {
-      return AuthService.login(payload).then(async (payload) => {
-        const {
-          user,
-          token
-        } = payload;
-        AuthService.storeToken(token);
-        AuthService.setHeader(token);
-        await context.commit('SET_TOKEN', token);
+      return AuthService.login(payload).then(async payload => {
+        const { user, token } = payload
+        AuthService.storeToken(token)
+        AuthService.setHeader(token)
+        await context.commit('SET_TOKEN', token)
 
-        AuthService.storeUser(user);
-        await context.commit('SET_USER', user);
-        return user;
-      });
+        AuthService.storeUser(user)
+        await context.commit('SET_USER', user)
+        return user
+      })
     },
-    GET_ADDRESS_LIST: (context) => {
-      return Axios.get('http://localhost:3000/auth/address')
-        .then(async response => {
-          if (response.status === 200 || response.status === 201) {
-            const {
-              payload
-            } = response.data;
-            await context.commit('SET_ADDRESS_LIST', payload)
-            return payload;
-          }
-        });
+    GET_ADDRESS_LIST: context => {
+      return Axios.get('http://localhost:3000/address').then(async response => {
+        if (response.status === 200 || response.status === 201) {
+          const { payload } = response.data
+          await context.commit('SET_ADDRESS_LIST', payload)
+          return payload
+        }
+      })
     },
     REGISTER: (context, payload) => {
-      return AuthService.register(payload).then(async (payload) => {
-        const {
-          user,
-          token
-        } = payload;
-        AuthService.storeToken(token);
-        AuthService.setHeader(token);
-        await context.commit('SET_TOKEN', token);
+      return AuthService.register(payload).then(async payload => {
+        const { user, token } = payload
+        AuthService.storeToken(token)
+        AuthService.setHeader(token)
+        await context.commit('SET_TOKEN', token)
 
-        AuthService.storeUser(user);
-        await context.commit('SET_USER', user);
-        return user;
-      });
-
+        AuthService.storeUser(user)
+        await context.commit('SET_USER', user)
+        return user
+      })
     },
     USER: (context, payload) => {
-      return AuthService.user(payload).then(async (payload) => {
-        const {
-          user,
-          token
-        } = payload;
-        AuthService.storeToken(token);
-        AuthService.setHeader(token);
-        await context.commit('SET_TOKEN', token);
+      return AuthService.user(payload).then(async payload => {
+        const { user, token } = payload
+        AuthService.storeToken(token)
+        AuthService.setHeader(token)
+        await context.commit('SET_TOKEN', token)
 
-        AuthService.storeUser(user);
-        await context.commit('SET_USER', user);
-        return user;
-      });
-    },
+        AuthService.storeUser(user)
+        await context.commit('SET_USER', user)
+        return user
+      })
+    }
   }
-});
+})
 
-export default store;
+export default store

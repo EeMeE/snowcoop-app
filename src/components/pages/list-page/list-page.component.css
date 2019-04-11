@@ -12,3 +12,24 @@
   margin: 0 auto;
   margin-top: 120px;
 }
+
+.list-wrapper {
+  padding: 100px;
+}
+
+.map-view-card > .el-card_body {
+  padding: 0;
+}
+
+.list-header {
+  display: flex;
+  margin-bottom: 20px;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.list-title {
+  font-family: Roboto;
+  font-size: 24px;
+  font-weight: bold;
+}
