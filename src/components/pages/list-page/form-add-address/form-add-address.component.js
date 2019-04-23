@@ -11,14 +11,14 @@ export default {
   },
   methods: {
     submit() {
-      this.$store.dispatch("ADD_ADDRESS", this.formData).then(address => {
+      this.$store.dispatch('ADD_ADDRESS', this.formData).then(address => {
         if (address) {
-          this.toggleForm(false);
+          this.toggleForm(false)
         }
-      });
+      })
     },
     toggleForm(showForm) {
-      this.showForm = showForm;
+      this.showForm = showForm
     },
     setPlace(place) {
       /** eslint-disable **/
