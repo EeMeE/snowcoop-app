@@ -23,6 +23,8 @@ Vue.use(VueGoogleMaps, {
 })
 Vue.config.productionTip = false
 
+Vue.router = router
+
 new Vue({
   router,
   store,
