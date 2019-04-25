@@ -3,7 +3,6 @@ import loginPage from './components/pages/login-page/login-page.component.vue'
 import registerPage from './components/pages/register-page/register-page.component.vue'
 import dashboardPage from './components/pages/dashboard-page/dashboard-page.component.vue'
 import listPage from './components/pages/list-page/list-page.component.vue'
-import sideNavigation from './components/side-navigation/side-navigation.component.vue'
 
 const router = new VueRouter({
   routes: [
@@ -24,26 +23,21 @@ const router = new VueRouter({
       path: '/dashboard',
       component: dashboardPage,
       meta: {
-        requireAuth: true
+        requiresAuth: true
       }
     },
     {
       path: '/list',
       component: listPage,
       meta: {
-        requireAuth: true
+        requiresAuth: true
       }
-    },
-
-    {
-      path: '/sidenavigation',
-      component: sideNavigation
     }
   ]
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.requireAuth)) {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
     if (localStorage.getItem('token') == null) {
       next({
         path: '/login',

@@ -11,19 +11,22 @@ import * as VueGoogleMaps from 'vue2-google-maps'
 import router from './router'
 import store from './store'
 
+Vue.config.productionTip = false
+
 Vue.use(VueRouter)
 Vue.use(ElementUI)
 Vue.use(VueForm)
 Vue.use(VueGoogleMaps, {
   load: {
-    // key: "AIzaSyDNqFIzbbGHHxOQY1s7dkA5FMWtW6RSyYs",
     key: process.env.VUE_APP_GOOGLE_API_KEY,
     libraries: 'places' // necessary for places input
   }
 })
-Vue.config.productionTip = false
 
 Vue.router = router
+
+/* eslint-disable */
+console.log(process.env.VUE_APP_GOOGLE_API_KEY)
 
 new Vue({
   router,

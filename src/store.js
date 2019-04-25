@@ -16,10 +16,10 @@ const store = new Vuex.Store({
       return state.user
     },
     IS_LOGIN: state => {
-      if (state.toekn) {
+      if (state.token) {
         AuthService.setHeader(state.token)
       } else {
-        //redirect the user to login page
+        //  redirect the user to login page
         Vue.router.push('login')
       }
 
@@ -53,12 +53,6 @@ const store = new Vuex.Store({
         return user
       })
     },
-    GET_ADDRESS_LIST: context => {
-      return AddressService.getAddressList().then(async payload => {
-        await context.commit('SET_ADDRESS_LIST', payload)
-        return payload
-      })
-    },
     REGISTER: (context, payload) => {
       return AuthService.register(payload).then(async payload => {
         const { user, token } = payload
@@ -69,6 +63,20 @@ const store = new Vuex.Store({
         AuthService.storeUser(user)
         await context.commit('SET_USER', user)
         return user
+      })
+    },
+    GET_ADDRESS_LIST: context => {
+      return AddressService.getAddressList().then(async payload => {
+        await context.commit('SET_ADDRESS_LIST', payload)
+        return payload
+      })
+    },
+    ADD_ADDRESS: (context, payload) => {
+      return AddressService.addAddress(payload).then(async payload => {
+        const addressList = context.state.addressList
+        addressList.push(payload)
+        await context.commit('SET_ADDRESS_LIST', addressList)
+        return payload
       })
     },
     USER: (context, payload) => {
