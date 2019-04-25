@@ -4,28 +4,74 @@ export default {
     return {
       showForm: false,
       place: null,
-      formData: {},
-      rules: {},
-      isFormValidated: false
+      formData: {
+        street: null,
+        city: null,
+        province: null,
+        postalCode: null,
+        lat: null,
+        lng: null
+      },
+      rules: {
+        street: [{ required: true }],
+        city: [{ required: true }],
+        province: [{ required: true }],
+        postalCode: [{ required: true }],
+        lat: [{ required: true }],
+        lng: [{ required: true }]
+      },
+      isFormValidated: false,
+      addressInput: null
     }
   },
   methods: {
-    submit() {
-      this.$store.dispatch('ADD_ADDRESS', this.formData).then(address => {
-        if (address) {
-          this.toggleForm(false)
-        }
-      })
+    updateIsFormValidated() {
+      const fields = this.$refs.formData.fields
+      this.isFormValidated = fields.reduce((acc, field) => {
+        const valid = field.isRequired && field.validateState === 'success'
+        const noError = !field.isRequired && field.validateState !== 'error'
+        return acc && (valid || noError)
+      }, true)
     },
-    toggleForm(showForm) {
-      this.showForm = showForm
+    submit() {
+      if (this.isFormValidated) {
+        const address = {
+          street: this.formData.street,
+          city: this.formData.city,
+          province: this.formData.province,
+          postalCode: this.formData.postalCode,
+          lat: this.formData.lat,
+          lng: this.formData.lng
+        }
+        this.$store
+          .dispatch('ADD_ADDRESS', address)
+          .then(
+            address => this.onAddAddressSuccessful(address),
+            error => this.onAddAddressFailed(error)
+          )
+      }
+      /** this.$store.dispatch('ADD_ADDRESS', this.formData).then(address => {
+        //if (address) {
+          //this.toggleForm(false)
+        }
+      })  */
+    },
+    onAddAddressSuccessful(address) {
+      if (address) {
+        this.toggleForm(false)
+      }
+    },
+    onAddAddressFailed(error) {
+      /* eslint-disable */
+      console.error(error)
+      this.toggleForm(false)
     },
     setPlace(place) {
       /** eslint-disable **/
-      console.log(place)
+      //  console.log(place)
       const { address_components, geometry } = place
       const address = this.buildAddressData(address_components, geometry)
-      console.log(address)
+      //  console.log(address)
 
       if (address) {
         this.place = address
@@ -36,6 +82,19 @@ export default {
         this.formData.lat = address.lat
         this.formData.lng = address.lng
       }
+    },
+    toggleForm(showForm) {
+      this.showForm = showForm
+    },
+    handleClose() {
+      this.place = null
+      this.formData.street = null
+      this.formData.city = null
+      this.formData.province = null
+      this.formData.postalCode = null
+      this.formData.lat = null
+      this.formData.lng = null
+      this.addressInput = null
     },
     buildAddressData(components, geometry) {
       const address = {}

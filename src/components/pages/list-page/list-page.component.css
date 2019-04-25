@@ -14,7 +14,7 @@
 }
 
 .list-wrapper {
-  padding: 100px;
+  padding: 50px 100px;
 }
 
 .map-view-card > .el-card_body {
@@ -32,4 +32,18 @@
   font-family: Roboto;
   font-size: 24px;
   font-weight: bold;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.list-header-button-wrapper > button {
+  font-size: 18px;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-weight: bold;
+  background-color: #1944e8;
+  color: white;
+  border: none;
 }

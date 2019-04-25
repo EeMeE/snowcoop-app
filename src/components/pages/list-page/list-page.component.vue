@@ -7,7 +7,7 @@
         v-if="addressList"
       >{{ `You have ${addressList.length} addresses to complete` }}</span>
       <div class="list-header-button-wrapper">
-        <button @click.prevent="showForm">Add</button>
+        <button @click.prevent="showForm()">Add</button>
       </div>
     </div>
     <div class="list-view-wrapper">

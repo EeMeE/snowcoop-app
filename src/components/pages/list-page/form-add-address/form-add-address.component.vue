@@ -1,6 +1,6 @@
 <template>
   <div id="formAddAddress">
-    <el-dialog title="Add New Address" :visible.sync="showForm" width="70%">
+    <el-dialog title="Add New Address" @close="handleClose" :visible.sync="showForm" width="70%">
       <span>
         <div class="form-body-wrapper">
           <el-form :model="formData">
